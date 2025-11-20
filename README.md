@@ -1,2 +1,55 @@
 # sofiagarcia
 proyecto final
+import time
+import random
+
+temp_min = 20.0
+temp_max = 24.0
+
+lista_temperaturas = [] 
+
+
+print("Calefacción con lecturas automáticas\n")
+
+
+for ciclo in range(10):
+    
+    nueva_temp = random.uniform(18.0, 26.0)
+    lista_temperaturas.append(nueva_temp)
+
+    
+    if len(lista_temperaturas) > 8:
+        lista_temperaturas.pop(0)
+
+    suma = 0
+    for c in lista_temperaturas:
+        suma += c
+
+    
+    promedio = suma / len(lista_temperaturas)
+    max_temp = lista_temperaturas[0]
+    min_temp = lista_temperaturas[0]
+    
+    
+    for c in lista_temperaturas:
+        if c > max_temp:
+            max_temp = c
+        if c < min_temp:
+            min_temp = c
+
+    variacion = max_temp - min_temp
+
+    print(f"\n Ciclo {ciclo + 1}")
+    print("Temperaturas registradas:", [round(t,2) for t in lista_temperaturas])
+    print(f"Promedio: {promedio:.1f} °C")
+
+    
+    if promedio < temp_min:
+        print("→ Calefacción ENCENDIDA (temperatura baja)")
+    elif promedio > temp_max:
+        print("→ Calefacción APAGADA (temperatura alta)")
+    else:
+        print("→ Temperatura estable, sin cambios")
+
+
+    time.sleep(1.5)
